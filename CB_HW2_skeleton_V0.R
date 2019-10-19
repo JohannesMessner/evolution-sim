@@ -78,7 +78,7 @@ create_TN93_Q_matrix = function(pi, alpha1, alpha2, beta) {
 get_starting_nucleotide = function(pi) {
     # Sample a starting nucleotide from the stationary distribution
 
-    # ???
+    nucleotide <- sample(c(1,2,3,4), size = 1, prob = pi)
 
     # Return the sampled nucleotide
     # nucleotide: integer nucleotide value
