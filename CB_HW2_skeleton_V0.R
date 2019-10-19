@@ -43,7 +43,32 @@ transform_to_nucleotides = function(sequence) {
 create_TN93_Q_matrix = function(pi, alpha1, alpha2, beta) {
     # Create the TN93 transition rate matrix Q as specified in the assignment.
     
-    # ???
+    # 4x4-matrix in order to be able to display the relationship between the 4 nucleotides
+    Q <- matrix(nrow=4, ncol=4)
+    
+    # Filling the matrix according to the TN93-definition
+    # The assumed nucleotide-encoding is (per the asssignment):
+    # T->1, C->2, A->3, G->4
+    
+    Q[1,2] <- alpha1*pi[2]
+    Q[1,3] <- beta*pi[3]
+    Q[1,4] <- beta*pi[4]
+    Q[1,1] <- -(Q[1,2]+Q[1,3]+Q[1,4])
+    
+    Q[2,1] <- alpha1*pi[1]
+    Q[2,3] <- beta*pi[3]
+    Q[2,4] <- beta*pi[4]
+    Q[2,2] <- -(Q[2,1]+Q[2,3]+Q[2,4])
+    
+    Q[3,1] <- beta*pi[1]
+    Q[3,2] <- beta*pi[2]
+    Q[3,4] <- alpha2*pi[4]
+    Q[3,3] <- -(Q[3,1]+Q[3,2]+Q[3,4])
+    
+    Q[4,1] <- beta*pi[1]
+    Q[4,2] <- beta*pi[2]
+    Q[4,3] <- alpha2*pi[3]
+    Q[4,4] <- -(Q[4,1]+Q[4,2]+Q[4,3])
     
     # Return the transition rate matrix
     # Q: 4 by 4 matrix of rates
