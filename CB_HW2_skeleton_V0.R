@@ -104,8 +104,16 @@ get_evolved_sequence = function(sequence, branch_length, Q) {
     # branch_length: the length of the branch along which evolution happens
     # Q: the transition rate matrix
  
-    # ???
- 
+    # Compute the probability matrix from the transition rate matrix
+    P <- expm(branch_length * Q)
+    
+    # Compute evolved sequence
+    #evolved_sequence <- numeric(0)
+    evolve <- function(nuc) {
+        sample(c(1,2,3,4), size = 1, prob = P[nuc,])
+    }
+    evolved_sequence <- sapply(X = sequence, FUN = evolve)
+    
     # Return the nucleotide sequence after all positions have evolved along the given branch.
     # evolved_sequence: the vector of new integer nucleotide values at the end of the branch
     return(evolved_sequence)
