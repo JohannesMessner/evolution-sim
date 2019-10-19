@@ -130,10 +130,10 @@ simulate_evolution = function(newick_tree, pi, alpha1, alpha2, beta, N) {
     tree = reorder(tree, order = "cladewise")
     
     # Set up the Q matrix
-    # ???
+    Q <- create_TN93_Q_matrix(pi = pi, alpha1 = alpha1, alpha2 = alpha2, beta = beta)
     
     # Set up the starting sequence @ the root of the tree
-    # ???
+    starting_sequence <- get_starting_sequence(pi = pi, N = N)
     
     # Prepare a list to store evolved sequences at each node
     sequence_per_node = list()
@@ -146,7 +146,9 @@ simulate_evolution = function(newick_tree, pi, alpha1, alpha2, beta, N) {
         branch_length = tree$edge.length[i]
         parent_sequence = sequence_per_node[[node_parent]]
         
-        # ???
+        child_sequence <- get_evolved_sequence(sequence = parent_sequence,
+                                               branch_length = branch_length,
+                                               Q = Q)
 
         sequence_per_node[[node_child]] = child_sequence
     }
