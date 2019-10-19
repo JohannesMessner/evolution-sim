@@ -88,7 +88,10 @@ get_starting_nucleotide = function(pi) {
 get_starting_sequence = function(pi, N) {
     # Sample a starting sequence of length N
 
-    # ???
+    starting_sequence <- numeric(N)
+    for (i in seq(1,N)){
+        starting_sequence[i] <- get_starting_nucleotide(pi)
+    }
 
     # Return the sampled sequence
     # starting_sequence: vector of integer nucleotide values
